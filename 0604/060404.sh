@@ -1,13 +1,10 @@
 if [ -d "$1" ]; then
-for file in $(ls "$1")
-do
-
-    if [ -x "${1}/$file" ]; then
-
-        echo "$file"
-    fi
-done
+    for file in $(find "$1" -maxdepth 1 -type f)
+    do
+        if [ ! -r "$file" ]; then
+            echo $(basename "$file")
+        fi
+    done
 else
-
-    echo "$1:ディレクトリではありません"
+    echo "${1}:ディレクトリではありません"
 fi
